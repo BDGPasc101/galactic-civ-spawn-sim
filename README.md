@@ -51,6 +51,18 @@ Unit conversion is explicit: 1 Gyr \(=10^9\) yr, and a light travel distance
 t_{\rm emerge}\le T_{\rm MW}\le t_{\rm emerge}+L_{\rm yr}/10^9.
 \]
 
+The expected active-now population integrates the same birth process over the
+overlap window
+\[
+\max(0,T_{\rm MW}-t_{\rm evo}-L_{\rm yr}/10^9)
+\le t_{\rm birth}\le T_{\rm MW}-t_{\rm evo}.
+\]
+The local and whole-Galaxy active intensities use this identical time window;
+the local intensity applies the 10,000 ly mask. The reported nearest-neighbor
+median is unconditional across realizations, with realizations containing no
+active Galaxy-wide civilization represented internally by an infinite nearest
+distance and summarized as unavailable when the median active count is zero.
+
 Its radio light-cone is present when
 
 \[
@@ -75,6 +87,19 @@ existence; it is a past-light-cone window of width \(L_{\rm yr}/10^9\) Gyr.
 
 ```bash
 pip install -r requirements.txt
+streamlit run app.py
 pytest
 python -c "from src.monte_carlo import run_monte_carlo; r=run_monte_carlo(); print(r.prob_ever_10kly, r.prob_now_10kly)"
 ```
+
+The Streamlit SETI Observatory provides scenario controls, cached Monte Carlo
+summaries, a habitability-weighted Milky Way map, posterior distributions, and a
+parameter sensitivity view. Map status metadata and the cosmic event timeline
+are deterministic representative samples drawn from the active astrobiology
+priors (including the selected random seed, evolutionary clock, and longevity);
+they are illustrative because Phase 1 does not expose per-civilization event
+timestamps. The reported probability and count metrics are from the Phase 1
+simulation result.
+
+Run the full test suite with `pytest` after launching or changing the
+observatory.

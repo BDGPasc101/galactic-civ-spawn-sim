@@ -36,8 +36,11 @@ class AstrobiologyPriors:
             raise ValueError("f_star and w_M must be in [0, 1]")
         if not 0.0 <= self.f_l_mean <= 1.0:
             raise ValueError("f_l_mean must be in [0, 1]")
-        if self.t_evo_mean_gyr < 0.0 or self.t_evo_sigma_gyr < 0.0:
-            raise ValueError("Evolutionary clock parameters must be non-negative")
+        if self.t_evo_mean_gyr <= 0.0 or self.t_evo_sigma_gyr < 0.0:
+            raise ValueError(
+                "t_evo_mean_gyr must be positive and "
+                "t_evo_sigma_gyr must be non-negative"
+            )
         if self.L_median_yr <= 0.0 or self.L_sigma < 0.0:
             raise ValueError("Longevity parameters must be positive")
 

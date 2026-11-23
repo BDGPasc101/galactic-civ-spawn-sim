@@ -101,7 +101,7 @@ def build_galactic_rate_grid(n_r=31, n_theta=48, n_z=17, n_t=28,
     # 13.6 Gyr history. This keeps downstream Poisson counts computationally
     # tractable while preserving relative space-time structure.
     dt = np.gradient(t_birth)
-    integrated_stars = np.sum(rate * volume, axis=(0, 1, 2, 3)) * dt.mean()
+    integrated_stars = np.sum(rate * volume * dt[None, None, None, :])
     if integrated_stars > 0.0:
         rate *= 1.0e11 * birth_rate_per_solar_mass / integrated_stars
 
